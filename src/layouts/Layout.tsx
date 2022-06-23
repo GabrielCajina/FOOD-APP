@@ -1,6 +1,7 @@
 import { Box, Grid } from "@chakra-ui/react";
 import React from "react";
 import MinisideBar from "../components/MinisideBar";
+import MobilePanel from "../components/ui/MobilePanel";
 
 const Layout: React.FC<{ children: React.ReactNode; panel: JSX.Element }> = ({
   children,
@@ -19,6 +20,8 @@ const Layout: React.FC<{ children: React.ReactNode; panel: JSX.Element }> = ({
       <Box display={{ base: "none", xl: "block" }} h="full" p={0}>
         {panel}
       </Box>
+
+      <MobilePanel panel={panel} />
     </Grid>
   );
 };

@@ -124,7 +124,7 @@ const ShoppingCartSection = () => {
 
       {totalPrice && (
         <Text mt={4} p={1} fontSize={"lg"} fontWeight="bold">
-          Product: {totalPrice.toFixed(2)}
+          Product: ${totalPrice.toFixed(2)}
         </Text>
       )}
     </Flex>

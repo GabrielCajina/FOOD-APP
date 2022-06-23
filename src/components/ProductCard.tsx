@@ -6,9 +6,12 @@ import React from "react";
 import { useProduct } from "../store/useProduct";
 import { Text } from "@chakra-ui/react";
 import Icon from "./Icon";
+import { useMenu } from "../store/useMenu";
 
 const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
   const { addProduct, products } = useProduct();
+  const setIsOpen = useMenu((s) => s.setIsOpen);
+
   return (
     <GridItem
       minH={20}

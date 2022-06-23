@@ -23,7 +23,7 @@ const MinisideBar = () => {
       flexDirection="column"
       justifyContent={"space-between"}
       alignItems="center"
-      boxShadow={"md"}
+      boxShadow={"lg"}
     >
       <Image
         src="/logo.svg"
