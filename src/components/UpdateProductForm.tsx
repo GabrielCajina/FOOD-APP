@@ -51,7 +51,10 @@ const UpdateProductForm: React.FC<{
 
       <Button
         onClick={async () => {
-          const response = await editProduct(product.id, getValues());
+          const response = await editProduct(product.id, {
+            ...getValues(),
+            category: product.category,
+          });
           if (response) {
             onUpdate();
           }
