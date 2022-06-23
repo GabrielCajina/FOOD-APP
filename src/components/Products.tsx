@@ -10,9 +10,7 @@ import Header from "./Header";
 const Products: React.FC<{}> = () => {
   const filter = useProduct((s) => s.productFilter);
   const client = useQueryClient();
-  const { data, isLoading, isError } = useQuery("products", getAllProducts, {
-    refetchOnMount: true,
-  });
+  const { data, isLoading, isError } = useQuery("products", getAllProducts);
 
   const products = useMemo(() => {
     if (!data) return;
