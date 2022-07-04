@@ -1,13 +1,8 @@
 import { ChakraProvider } from "@chakra-ui/react";
-import type { AppContext, AppProps } from "next/app";
+import useMyQueryClient from "client/useMyQueryClient";
+import type { AppProps } from "next/app";
 import React from "react";
-import {
-  dehydrate,
-  Hydrate,
-  QueryClient,
-  QueryClientProvider,
-} from "react-query";
-import { getAllProducts } from "../services/products.service";
+import { Hydrate, QueryClientProvider } from "react-query";
 import "../styles/globals.css";
 
 type PageLayout = {
@@ -15,7 +10,7 @@ type PageLayout = {
 };
 
 function MyApp({ Component, pageProps }: AppProps & PageLayout) {
-  const [queryClient] = React.useState(() => new QueryClient());
+  const queryClient = useMyQueryClient();
   const Layout = Component.Layout ?? React.Fragment;
 
   return (
@@ -30,19 +25,5 @@ function MyApp({ Component, pageProps }: AppProps & PageLayout) {
     </ChakraProvider>
   );
 }
-
-MyApp.getInitialProps = async (appContext: AppContext) => {
-  try {
-    const queryClient = new QueryClient();
-
-    await queryClient.prefetchQuery("products", getAllProducts);
-
-    return {
-      pageProps: { dehydratedState: dehydrate(queryClient) },
-    };
-  } catch (error: any) {
-    return {};
-  }
-};
 
 export default MyApp;

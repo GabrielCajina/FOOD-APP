@@ -8,11 +8,13 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { Product } from "@prisma/client";
+import useCreateProduct from "hooks/useCreateProduct";
+
 import { useRouter } from "next/router";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { createProduct } from "../services/products.service";
-import { schema } from "../utils/schema";
+import { createProduct } from "services/products.service";
+import { schema } from "utils/schema";
 import TextInput from "./ui/TextInput";
 
 const CreateProduct = () => {
@@ -24,6 +26,8 @@ const CreateProduct = () => {
     clearErrors,
   } = useForm<Product>();
 
+  const { mutateAsync } = useCreateProduct();
+
   const router = useRouter();
   const toast = useToast();
 
@@ -31,14 +35,13 @@ const CreateProduct = () => {
     clearErrors();
     const form = getValues();
     try {
-      const isValid = await schema.validate(form);
-      console.log(isValid);
+      await schema.validate(form);
     } catch (error: any) {
       setError(error.path, { message: error.errors[0] });
       return;
     }
 
-    createProduct({
+    mutateAsync({
       ...form,
       price: parseFloat(String(form.price)),
     })

@@ -1,3 +1,5 @@
+import { withAuth } from "auth/withAuth";
+import { GetServerSideProps } from "next";
 import React from "react";
 import Products from "../components/Products";
 import ShoppingCartSection from "../components/ShoppingCartSection";
@@ -13,3 +15,5 @@ Home.Layout = ({ children }) => {
 };
 
 export default Home;
+
+export const getServerSideProps: GetServerSideProps = withAuth();

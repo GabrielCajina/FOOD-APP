@@ -1,3 +1,5 @@
+import { withAuth } from "auth/withAuth";
+import { GetServerSideProps } from "next";
 import React from "react";
 import CreateProduct from "../../components/CreateProduct";
 import Products from "../../components/Products";
@@ -13,3 +15,5 @@ Product.Layout = ({ children }) => {
 };
 
 export default Product;
+
+export const getServerSideProps: GetServerSideProps = withAuth();

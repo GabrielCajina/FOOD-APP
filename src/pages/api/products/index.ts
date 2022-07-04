@@ -1,4 +1,5 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
+import { isAuth } from "middleware/isAuth";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { prisma } from "../../../db";
 import { mapProducts } from "../../../utils/product";
@@ -7,6 +8,11 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  const user = await isAuth(req.cookies.jid);
+
+  if (!user) {
+    return res.status(403).json({ message: "Not User" });
+  }
   switch (req.method) {
     case "GET":
       const data = await prisma.product.findMany();

@@ -24,3 +24,9 @@ model Product {
   description String?
   category    Category
 }
+
+model User {
+  id       String @unique @default(uuid())
+  email    String @unique
+  password String
+}

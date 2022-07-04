@@ -5,11 +5,16 @@ import Icon from "./Icon";
 import {
   ArrowLeftIcon,
   ChartSquareBarIcon,
+  HomeIcon,
+  LogoutIcon,
   MenuIcon,
+  PlusIcon,
   ShoppingCartIcon,
 } from "@heroicons/react/outline";
 import { useRouter } from "next/router";
 import { useProduct } from "../store/useProduct";
+import { logout } from "services/auth.service";
+import MiniSideBarIcon from "./ui/MiniSideBarIcon";
 
 const MinisideBar = () => {
   const router = useRouter();
@@ -38,14 +43,30 @@ const MinisideBar = () => {
         alignItems={"center"}
         gap={8}
       >
-        <IconButton aria-label="menu-icon" onClick={() => router.push("/")}>
-          <Icon icon={MenuIcon} />
-        </IconButton>
+        <MiniSideBarIcon icon={HomeIcon} href="/" label="menu-icon" />
         <IconButton onClick={() => router.back()} aria-label="back">
           <Icon icon={ArrowLeftIcon} />
         </IconButton>
-        <IconButton aria-label="charts">
-          <Icon icon={ChartSquareBarIcon} />
+        <MiniSideBarIcon
+          label="charts"
+          icon={ChartSquareBarIcon}
+          href="/charts"
+        />
+        <MiniSideBarIcon
+          label="create-product"
+          icon={PlusIcon}
+          href="/p/create-product"
+        />
+        <IconButton
+          aria-label="charts"
+          onClick={async () => {
+            const response = await logout();
+            if (response.ok) {
+              router.replace("/auth/login");
+            }
+          }}
+        >
+          <Icon icon={LogoutIcon} />
         </IconButton>
       </Flex>
 

@@ -1,4 +1,5 @@
-import { CircularProgress, Flex, Text } from "@chakra-ui/react";
+import { Center, CircularProgress, Flex, Text } from "@chakra-ui/react";
+import Image from "next/image";
 import React, { useMemo } from "react";
 import { useQuery } from "react-query";
 import { getAllProducts } from "../services/products.service";
@@ -23,7 +24,14 @@ const Products: React.FC<{}> = () => {
   }, [filter, data]);
 
   if (isError) {
-    return <Text>Error</Text>;
+    return (
+      <Center display={"flex"} flex={1} flexDirection="column">
+        <Image src="/error.svg" width={150} height={150} />
+        <Text fontWeight={"bold"} fontSize="2xl">
+          SomeThing Went Wrong
+        </Text>
+      </Center>
+    );
   }
 
   return (

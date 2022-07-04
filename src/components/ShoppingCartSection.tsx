@@ -29,7 +29,13 @@ const ShoppingCartSection = () => {
     setProducts(newProducts);
   }
   return (
-    <Flex p={9} h="full" flexDirection={"column"} boxShadow="md">
+    <Flex
+      p={9}
+      h="full"
+      flexDirection={"column"}
+      boxShadow="md"
+      position={"relative"}
+    >
       <Flex
         alignItems={"center"}
         bgColor="brown"
@@ -121,6 +127,18 @@ const ShoppingCartSection = () => {
           </Flex>
         )}
       </Box>
+
+      <Box
+        position={"absolute"}
+        zIndex={-1}
+        background="yellow.500"
+        rounded={"full"}
+        w={200}
+        h={200}
+        mx="auto"
+        top={-20}
+        right={-20}
+      />
 
       {totalPrice && (
         <Text mt={4} p={1} fontSize={"lg"} fontWeight="bold">
